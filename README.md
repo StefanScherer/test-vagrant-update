@@ -197,6 +197,29 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 So, bsdtar.exe and bsdcpio.exe are missing after an update. Perhaps other files in other directories as well. Haven't looked deeper into the logs yet.
 
+### Deeper log into update 1.5.2 to vagrant_1.6.2.log
+
+Searching for the ComponentId, I found following lines that shows some Disallow messages for the two files (not other messages found):
+
+```
+Action start 22:33:32: CostFinalize.
+MSI (s) (78:78) [22:33:32:438]: Note: 1: 2205 2:  3: MsiAssembly 
+MSI (s) (78:78) [22:33:32:438]: Note: 1: 2228 2:  3: MsiAssembly 4:  SELECT `MsiAssembly`.`Attributes`, `MsiAssembly`.`File_Application`, `MsiAssembly`.`File_Manifest`,  `Component`.`KeyPath` FROM `MsiAssembly`, `Component` WHERE  `MsiAssembly`.`Component_` = `Component`.`Component` AND `MsiAssembly`.`Component_` = ? 
+MSI (s) (78:78) [22:33:36:533]: Disallowing installation of component: {57FD6298-3821-4E4A-AF50-4DFF89B48142} since the same component with higher versioned keyfile exists
+MSI (s) (78:78) [22:33:36:533]: Disallowing installation of component: {8C99AA3D-1415-419C-834D-E4B4766EDEBD} since the same component with higher versioned keyfile exists
+MSI (s) (78:78) [22:33:37:530]: Doing action: MigrateFeatureStates
+MSI (s) (78:78) [22:33:37:530]: Note: 1: 2205 2:  3: ActionText 
+Action ended 22:33:37: CostFinalize. Return value 1.
+MSI (s) (78:78) [22:33:37:530]: Migrating feature settings from product(s) '{12F15A73-F334-4EA6-8D73-CE23C79A2DA9}'
+MSI (s) (78:78) [22:33:37:621]: MigrateFeatureStates: based on existing product, setting feature 'VagrantFeature' to 'Local' state.
+Action start 22:33:37: MigrateFeatureStates.
+MSI (s) (78:78) [22:33:38:238]: Disallowing installation of component: {8C99AA3D-1415-419C-834D-E4B4766EDEBD} since the same component with higher versioned keyfile exists
+MSI (s) (78:78) [22:33:38:238]: Disallowing installation of component: {57FD6298-3821-4E4A-AF50-4DFF89B48142} since the same component with higher versioned keyfile exists
+MSI (s) (78:78) [22:33:40:109]: Doing action: InstallValidate
+MSI (s) (78:78) [22:33:40:109]: Note: 1: 2205 2:  3: ActionText 
+Action ended 22:33:40: MigrateFeatureStates. Return value 1.
+```
+
 
 ## Acknowledgement
 
