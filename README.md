@@ -99,6 +99,39 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 As you can see the `FAIL - bastar.exe NOT found.` error, the file is really missing after the update.
 
+## First msi log file analysis
+
+These are the log files of the msiexec regarding `bsdtar.exe`.
+
+
+### vagrant_1.5.3.log
+
+```
+MSI (s) (78:98) [22:33:04:691]: Executing op: ComponentRegister(ComponentId={6C6CEB7D-6C95-4347-92AD-4627CEBEEFD2},KeyPath=c:\HashiCorp\Vagrant\embedded\gnuwin32\bin\bsdtar.exe,State=3,,Disk=1,SharedDllRefCount=0,BinaryType=0)
+MSI (s) (78:98) [22:33:06:105]: Executing op: ComponentRegister(ComponentId={81A2C8B9-6274-40B6-BC8B-61C8C2796AC0},KeyPath=c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe,State=3,,Disk=1,SharedDllRefCount=0,BinaryType=0)
+MSI (s) (78:98) [22:33:12:637]: Executing op: FileCopy(SourceName=bsdtar.exe,SourceCabKey=fil5493118014D2CE8ABC10574179771328,DestName=bsdtar.exe,Attributes=512,FileSize=75264,PerTick=65536,,VerifyMedia=1,,,,,CheckCRC=0,Version=2.4.12.3100,Language=1033,InstallMode=58982400,,,,,,,)
+MSI (s) (78:98) [22:33:12:637]: File: c:\HashiCorp\Vagrant\embedded\gnuwin32\bin\bsdtar.exe;    To be installed;    Won't patch;    No existing file
+MSI (s) (78:98) [22:33:15:339]: Executing op: FileCopy(SourceName=bsdtar.exe,SourceCabKey=fil7D70791D735CDCBD1A12E5DCBCD11800,DestName=bsdtar.exe,Attributes=512,FileSize=73728,PerTick=65536,,VerifyMedia=1,,,,,CheckCRC=0,,,InstallMode=58982400,HashOptions=0,HashPart1=-728757211,HashPart2=717283750,HashPart3=642632498,HashPart4=1953887051,,)
+MSI (s) (78:98) [22:33:15:339]: File: c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe;   To be installed;    Won't patch;    No existing file
+```
+
+### vagrant_1.6.2.log
+
+```
+MSI (s) (78:F8) [22:34:05:944]: Executing op: FileRemove(,FileName=bsdtar.exe,,ComponentId={6C6CEB7D-6C95-4347-92AD-4627CEBEEFD2})
+MSI (s) (78:F8) [22:34:05:944]: Verifying accessibility of file: bsdtar.exe
+MSI (s) (78:F8) [22:34:10:403]: Executing op: FileRemove(,FileName=bsdtar.exe,,ComponentId={81A2C8B9-6274-40B6-BC8B-61C8C2796AC0})
+MSI (s) (78:F8) [22:34:10:403]: Verifying accessibility of file: bsdtar.exe
+MSI (s) (78:78) [22:34:21:167]: Executing op: ComponentRegister(ComponentId={57FD6298-3821-4E4A-AF50-4DFF89B48142},KeyPath=c:\HashiCorp\Vagrant\embedded\gnuwin32\bin\bsdtar.exe,State=3,,Disk=1,SharedDllRefCount=2,BinaryType=0)
+MSI (s) (78:78) [22:34:23:303]: Executing op: ComponentRegister(ComponentId={5EE49329-5C55-48FF-AA92-A26F99F038DB},KeyPath=c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe,State=3,,Disk=1,SharedDllRefCount=2,BinaryType=0)
+MSI (s) (78:78) [22:34:35:235]: Executing op: FileCopy(SourceName=bsdtar.exe,SourceCabKey=fil7D70791D735CDCBD1A12E5DCBCD11800,DestName=bsdtar.exe,Attributes=512,FileSize=73728,PerTick=65536,,VerifyMedia=1,,,,,CheckCRC=0,,,InstallMode=58982400,HashOptions=0,HashPart1=-728757211,HashPart2=717283750,HashPart3=642632498,HashPart4=1953887051,,)
+MSI (s) (78:78) [22:34:35:235]: File: c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe;   To be installed;    Won't patch;    No existing file
+https://github.com/StefanScherer/test-vagrant-update
+```
+
+In the update, only the bsdtar.exe in the mingw directory will be installed, but not in gnuwin32.
+The old files with old ComponentId's will be removed.
+
 ## Acknowledgement
 
 Thanks to @mitchellh for Vagrant and the vagrantcloud!
