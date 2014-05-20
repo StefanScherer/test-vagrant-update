@@ -220,6 +220,58 @@ MSI (s) (78:78) [22:33:40:109]: Note: 1: 2205 2:  3: ActionText
 Action ended 22:33:40: MigrateFeatureStates. Return value 1.
 ```
 
+### Only install 1.5.3
+
+Then I only have installed Vagrant 1.5.3 to see which files are installed and which version has bsdtar.exe
+
+```
+==> default: Running provisioner: shell...
+    default: Running: c:\tmp\vagrant-shell.ps1
+==> default: Installing Vagrant 1.5.3
+==> default: Done with Vagrant 1.5.3
+==> default: Running provisioner: shell...
+    default: Running: c:\tmp\vagrant-shell.ps1
+==> default: OK - bsdtar.exe found.
+==> default: Listing all files in c:\hashicorp\vagrant\embedded\gnuwin32\bin
+==> default: bsdcpio.exe
+==> default: bsdtar.exe
+==> default: bunzip2.exe
+==> default: bzcat.exe
+==> default: bzcmp
+==> default: bzdiff
+==> default: bzegrep
+==> default: bzfgrep
+==> default: bzgrep
+==> default: bzip2.dll
+==> default: bzip2.exe
+==> default: bzip2recover.exe
+==> default: bzless
+==> default: bzmore
+==> default: libarchive2.dll
+==> default: zlib1.dll
+```
+
+The version of bsdtar.exe is 2.4.12.3100 from 6/27/2008
+
+### Only install 1.6.2
+
+```
+==> default: Running provisioner: shell...
+    default: Running: c:\tmp\vagrant-shell.ps1
+==> default: Installing Vagrant_1.6.2
+==> default: Done with Vagrant_1.6.2
+==> default: Running provisioner: shell...
+    default: Running: c:\tmp\vagrant-shell.ps1
+==> default: OK - bsdtar.exe found.
+==> default: Listing all files in c:\hashicorp\vagrant\embedded\gnuwin32\bin
+==> default: 
+==> default: bsdcpio.exe
+==> default: bsdtar.exe
+==> default: libarchive.dll
+```
+
+It installs less files and the version of bsdtar.exe is not set.
+
 
 ## Acknowledgement
 
