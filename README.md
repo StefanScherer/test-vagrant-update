@@ -115,7 +115,7 @@ MSI (s) (78:98) [22:33:15:339]: Executing op: FileCopy(SourceName=bsdtar.exe,Sou
 MSI (s) (78:98) [22:33:15:339]: File: c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe;   To be installed;    Won't patch;    No existing file
 ```
 
-### vagrant_1.6.2.log
+### Update to vagrant_1.6.2.log
 
 ```
 MSI (s) (78:F8) [22:34:05:944]: Executing op: FileRemove(,FileName=bsdtar.exe,,ComponentId={6C6CEB7D-6C95-4347-92AD-4627CEBEEFD2})
@@ -197,7 +197,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 So, bsdtar.exe and bsdcpio.exe are missing after an update. Perhaps other files in other directories as well. Haven't looked deeper into the logs yet.
 
-### Deeper log into update 1.5.2 to vagrant_1.6.2.log
+### Deeper log into update 1.5.3 to vagrant_1.6.2.log
 
 Searching for the ComponentId, I found following lines that shows some Disallow messages for the two files (not other messages found):
 
