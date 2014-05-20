@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "scripts/install_vagrant_1.5.3.ps1"
   config.vm.provision "shell", path: "scripts/install_vagrant_1.6.2.ps1"
+  config.vm.provision "shell", path: "scripts/install_superorca.ps1"
   config.vm.provision "shell", path: "scripts/check_bsdtar.ps1"
   config.vm.provision "shell", path: "scripts/check_vagrant_box_add.ps1"
 end
