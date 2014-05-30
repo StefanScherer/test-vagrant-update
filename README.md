@@ -1,14 +1,14 @@
 # test-vagrant-update
 
-This repo is for testing a vagrant update 1.5.3 -> 1.6.2 as there seems to be an issue 
+This repo is for testing a vagrant update 1.5.3 -> 1.6.3 as there seems to be an issue 
 with a missing `bsdtar.exe` after the update. See [Vagrant Issue 3674](https://github.com/mitchellh/vagrant/issues/3674) for details.
 
 ## Requirements
 
 You will need the following tools on your host machine:
 
-* Vagrant 1.6.2 
-* VirtualBox 4.3.10
+* Vagrant 1.6.2 or higher
+* VirtualBox 4.3.10 or higher
 
 ## Build the box
 
@@ -39,8 +39,8 @@ The results in the `resources` directory looks like this:
 $ ls -1 resources/
 vagrant_1.5.3.log
 vagrant_1.5.3.msi
-vagrant_1.6.2.log
-vagrant_1.6.2.msi
+vagrant_1.6.3.log
+vagrant_1.6.3.msi
 ```
 ## Test results
 
@@ -89,9 +89,9 @@ Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Done with Vagrant 1.5.3
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
-==> default: Downloading Vagrant_1.6.2
-==> default: Installing Vagrant_1.6.2
-==> default: Done with Vagrant_1.6.2
+==> default: Downloading Vagrant_1.6.3
+==> default: Installing Vagrant_1.6.3
+==> default: Done with Vagrant_1.6.3
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
 ==> default: Installing SuperOrca 11.0.0.1
@@ -135,7 +135,7 @@ MSI (s) (78:98) [22:33:15:339]: Executing op: FileCopy(SourceName=bsdtar.exe,Sou
 MSI (s) (78:98) [22:33:15:339]: File: c:\HashiCorp\Vagrant\embedded\mingw\bin\bsdtar.exe;   To be installed;    Won't patch;    No existing file
 ```
 
-### Update to vagrant_1.6.2.log
+### Update to vagrant_1.6.3.log
 
 ```
 MSI (s) (78:F8) [22:34:05:944]: Executing op: FileRemove(,FileName=bsdtar.exe,,ComponentId={6C6CEB7D-6C95-4347-92AD-4627CEBEEFD2})
@@ -152,7 +152,7 @@ https://github.com/StefanScherer/test-vagrant-update
 In the update, only the bsdtar.exe in the mingw directory will be installed, but not in gnuwin32.
 The old files with old ComponentId's will be removed.
 
-### Fresh installation of vagrant_1.6.2
+### Fresh installation of vagrant_1.6.3
 
 Without the install_vagrant_1.5.3.ps1 provisiong script, the msi log shows this:
 
@@ -204,8 +204,8 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: /vagrant => /Users/stefan/code/test-vagrant-update
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
-==> default: Installing Vagrant_1.6.2
-==> default: Done with Vagrant_1.6.2
+==> default: Installing Vagrant_1.6.3
+==> default: Done with Vagrant_1.6.3
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
 ==> default: OK - bsdtar.exe found.
@@ -217,7 +217,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 So, bsdtar.exe and bsdcpio.exe are missing after an update. Perhaps other files in other directories as well. Haven't looked deeper into the logs yet.
 
-### Deeper log into update 1.5.3 to vagrant_1.6.2.log
+### Deeper log into update 1.5.3 to vagrant_1.6.3.log
 
 Searching for the ComponentId, I found following lines that shows some Disallow messages for the two files (not other messages found):
 
@@ -273,13 +273,13 @@ Then I only have installed Vagrant 1.5.3 to see which files are installed and wh
 
 The version of bsdtar.exe is 2.4.12.3100 from 6/27/2008
 
-### Only install 1.6.2
+### Only install 1.6.3
 
 ```
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
-==> default: Installing Vagrant_1.6.2
-==> default: Done with Vagrant_1.6.2
+==> default: Installing Vagrant_1.6.3
+==> default: Done with Vagrant_1.6.3
 ==> default: Running provisioner: shell...
     default: Running: c:\tmp\vagrant-shell.ps1
 ==> default: OK - bsdtar.exe found.
